@@ -1,3 +1,5 @@
+package org.toastlytoast.chainedplugin.gameplay;
+
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -10,11 +12,9 @@ import org.toastlytoast.chainedplugin.ChainedPlugin;
 import org.toastlytoast.chainedplugin.mechanics.GroupManager;
 
 public class LinkPlayers implements Listener {
-    private final ChainedPlugin plugin;
     private final GroupManager groupManager;
 
     public LinkPlayers(ChainedPlugin plugin) {
-        this.plugin = plugin;
         this.groupManager = plugin.getGroupManager();
     }
 

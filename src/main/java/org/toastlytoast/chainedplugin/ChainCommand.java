@@ -1,9 +1,11 @@
-package org.toastlytoast.chainedplugin.commands;
+package org.toastlytoast.chainedplugin;
+
+import com.mojang.brigadier.tree.LiteralCommandNode;
 
 import io.papermc.paper.command.brigadier.CommandSourceStack;
 import io.papermc.paper.command.brigadier.Commands;
-import io.papermc.paper.command.brigadier.arguments.EntityArgument;
-
+import io.papermc.paper.command.brigadier.argument.ArgumentTypes;
+import io.papermc.paper.command.brigadier.argument.resolvers.selector.PlayerSelectorArgumentResolver;
 import net.kyori.adventure.text.Component;
 
 import org.bukkit.entity.Player;
@@ -11,16 +13,16 @@ import org.toastlytoast.chainedplugin.ChainedPlugin;
 import org.toastlytoast.chainedplugin.mechanics.GroupManager;
 
 public class ChainCommand {
-    public static LiteralCommandNode<CommandSourceStack> createCommand(Chained_Plugin plugin) {
+    public static LiteralCommandNode<CommandSourceStack> createCommand(ChainedPlugin plugin) {
         GroupManager groupManager = plugin.getGroupManager();
         
         return Commands.literal("chain")
             .then(Commands.literal("invite")
-                .then(Commands.argument("player", EntityArgument.player())
+                .then(Commands.argument("player", ArgumentTypes.player())
                     .executes(context -> {
                         CommandSourceStack source = context.getSource();
                         Player sender = source.getSender() instanceof Player ? (Player) source.getSender() : null;
-                        Player target = EntityArgument.getPlayer(context, "player");
+                        Player target = context.getArgument(context, PlayerSelectorArgumentResolver.class);
                         
                         if (sender == null) {
                             source.sendMessage(Component.text("This command can only be used by players!", NamedTextColor.RED));

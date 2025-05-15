@@ -3,8 +3,8 @@ package org.toastlytoast.chainedplugin;
 import io.papermc.paper.command.brigadier.CommandSourceStack;
 import io.papermc.paper.command.brigadier.Commands;
 import io.papermc.paper.command.brigadier.arguments.EntityArgument;
-import io.papermc.paper.lifecycle.LifecycleEventManager;
-import io.papermc.paper.lifecycle.LifecycleEvents;
+import io.papermc.paper.plugin.lifecycle.event.LifecycleEventManager;
+import io.papermc.paper.plugin.lifecycle.event.LifecycleEvents;
 
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
@@ -12,9 +12,9 @@ import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.toastlytoast.chainedplugin.commands.ChainCommand;
+import org.toastlytoast.chainedplugin.ChainCommand;
 import org.toastlytoast.chainedplugin.gameplay.LinkPlayers;
-import org.toastlytoast.chainedplugin.gameplay.GroupManager;
+import org.toastlytoast.chainedplugin.mechanics.GroupManager;
 
 public final class ChainedPlugin extends JavaPlugin
 {
@@ -25,8 +25,6 @@ public final class ChainedPlugin extends JavaPlugin
     public void onEnable() {
         this.groupManager = new GroupManager();
         this.linkPlayers = new LinkPlayers(this);
-        private GroupManager groupManager;
-        private LinkPlayers linkPlayers;
 
         // Register events
         Bukkit.getPluginManager().registerEvents(linkPlayers, this);

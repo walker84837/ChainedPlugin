@@ -1,6 +1,5 @@
 package org.toastlytoast.chainedplugin.mechanics;
 
-
 import org.bukkit.entity.Player;
 import java.util.*;
 
